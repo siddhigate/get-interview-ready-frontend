@@ -1,12 +1,12 @@
-import GridContainer from "./components/GridContainer";
-import TabNavItem from "./components/Tab/TabNavItem";
-import TabContent from "./components/Tab/TabContent";
-import SidebarLayout from "./layouts/SidebarLayout";
+import GridContainer from "../components/GridContainer";
+import TabNavItem from "../components/Tab/TabNavItem";
+import TabContent from "../components/Tab/TabContent";
+import SidebarLayout from "../layouts/SidebarLayout";
 import { useState } from "react";
-import Card from "./components/Card/Card";
+import Card from "../components/Card/Card";
 
-import MarkdownEditor from "./components/MarkdownEditor";
-import Modal from "./components/Modal";
+import MarkdownEditor from "../components/MarkdownEditor";
+import Modal from "../components/Modal";
 
 const dummyCards = [
   {

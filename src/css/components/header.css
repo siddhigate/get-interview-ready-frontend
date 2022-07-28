@@ -1,6 +1,6 @@
 .header {
     background-color: white;
-    padding: 0.25rem 1rem;
+    padding: 1.25rem 2rem;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 0px 24px;
     position: sticky;
     top: 0;
@@ -25,10 +25,8 @@
 }
 
 .header .logo-img {
-    width: 3rem;
-    height: 3rem;
-    margin-inline: 1rem;
-
+    width: 2rem;
+    height: 2rem;
 }
 
 .header .logo-title {
