@@ -6,6 +6,7 @@
 
 @import './components/header.css';
 @import './components/list.css';
+@import './components/modal.css';
 
 @import './layouts/mainlayout.css';
 @import './layouts/tab.css';

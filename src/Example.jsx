@@ -6,6 +6,7 @@ import { useState } from "react";
 import Card from "./components/Card/Card";
 
 import MarkdownEditor from "./components/MarkdownEditor";
+import Modal from "./components/Modal";
 
 const dummyCards = [
   {
@@ -45,6 +46,9 @@ Your answer will go here`;
 
 function Example() {
   const [activeTab, setActiveTab] = useState("tab1");
+
+  const [showModal, setShowModal] = useState(true);
+
   return (
     <SidebarLayout title="Headout">
       <ul className="tab-list list-style-none">
@@ -85,6 +89,7 @@ function Example() {
           ))}
         </GridContainer>
       </TabContent>
+      {showModal && <Modal title={"Hello World"} closeModal={() => setShowModal(false)}> Hellow</Modal>}
     </SidebarLayout>
   );
 }
