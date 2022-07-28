@@ -1,12 +1,13 @@
-import React from 'react'
-import NavLayout from '../layouts/NavLayout'
+import React from "react";
+import LogoutButton from "../features/authentication/components/LogoutButton";
+import NavLayout from "../layouts/NavLayout";
 
 const NavLayoutExample = () => {
   return (
     <NavLayout>
-        HEllo world    
+      <LogoutButton/>
     </NavLayout>
-  )
-}
+  );
+};
 
-export default NavLayoutExample
+export default NavLayoutExample;

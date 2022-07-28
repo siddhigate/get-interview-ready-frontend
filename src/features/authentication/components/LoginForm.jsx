@@ -1,10 +1,17 @@
 import React from "react";
+import { useAuth } from "../contexts/AuthContext";
 import { loginService } from "../services/loginService";
 
 const LoginForm = () => {
+  const { setAuth } = useAuth();
+
   async function login(user) {
-    const res = await loginService(user);
-    console.log(res);
+    try {
+      const res = await loginService(user);
+      setAuth({ token: res.data.token, isAuth: true });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   const submitHandler = (e) => {

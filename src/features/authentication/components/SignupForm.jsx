@@ -1,11 +1,17 @@
 import React, { useEffect } from "react";
+import { useAuth } from "../contexts/AuthContext";
 import { signupService } from "../services/signupService";
 
 const SignupForm = () => {
-  
+  const { setAuth } = useAuth();
+
   async function signup(user) {
-    const res = await signupService(user);
-    console.log(res);
+    try {
+      const res = await signupService(user);
+      setAuth({ token: res.data.token, isAuth: true });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   const submitHandler = (e) => {
