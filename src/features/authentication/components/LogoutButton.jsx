@@ -7,7 +7,7 @@ const LogoutButton = () => {
 
   async function logout() {
     try {
-      const res = await logoutService();
+      await logoutService();
       setAuth({ token: "", isAuth: false });
     } catch (err) {
       console.log(err);

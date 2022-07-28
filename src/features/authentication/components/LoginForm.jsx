@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { loginService } from "../services/loginService";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const LoginForm = () => {
-  const { setAuth } = useAuth();
+  const { auth, setAuth } = useAuth();
+  
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from.pathname || "/";
 
   async function login(user) {
     try {
       const res = await loginService(user);
+      localStorage.setItem("token", res.data.token);
       setAuth({ token: res.data.token, isAuth: true });
+      navigate(from, { replace: true });
     } catch (err) {
       console.log(err);
     }
@@ -25,6 +32,13 @@ const LoginForm = () => {
 
     login(user);
   };
+
+  useEffect(() => {
+    console.log(auth.isAuth)
+    if(auth.isAuth) {
+        navigate("/", { replace: true });
+    }
+  }, [auth.isAuth, navigate])
 
   return (
     <div className="min-height-90 flex flex-justify-center flex-items-center">

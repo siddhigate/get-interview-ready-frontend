@@ -1,14 +1,13 @@
-import NavLayoutExample from "./examples/NavLayoutExample";
-import { AuthContextProvider } from "./features/authentication/contexts/AuthContext";
-import Login from "./pages/authentication/Login";
-import Signup from "./pages/authentication/Signup";
+import NavRoutes from "./routes/NavRoutes";
 
 function App() {
-  return <div className="App">
-    <AuthContextProvider>
-    <NavLayoutExample/>
-    </AuthContextProvider>
-    </div>;
+  return (
+    <div className="App">
+      {/* <AuthContextProvider> */}
+        <NavRoutes />
+      {/* </AuthContextProvider> */}
+    </div>
+  );
 }
 
 export default App;
