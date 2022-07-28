@@ -1,5 +1,7 @@
+import NavLayoutExample from "./examples/NavLayoutExample";
+
 function App() {
-  return <div className="App">App</div>;
+  return <div className="App"><NavLayoutExample/></div>;
 }
 
 export default App;
