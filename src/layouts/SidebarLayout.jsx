@@ -1,3 +1,5 @@
+import LogoutButton from "../features/authentication/components/LogoutButton"
+
 const SidebarLayout = ({title, children}) => {
   return (
     <div className="body-container">
@@ -29,6 +31,7 @@ const SidebarLayout = ({title, children}) => {
                         <img src="../assets/dreamcompany.png" alt=""></img>
                         <span className="d-block">Dream companies</span>
                     </li>
+                    <LogoutButton/>
                 </ul>
             </div>
         </aside>

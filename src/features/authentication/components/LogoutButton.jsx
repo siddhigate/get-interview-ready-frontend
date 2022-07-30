@@ -15,7 +15,15 @@ const LogoutButton = () => {
     }
   }
 
-  return <button onClick={logout}>LogoutButton</button>;
+  return (
+    <li
+      style={{ borderTop: "1px solid gray", paddingTop: "1rem" }}
+      onClick={logout}
+    >
+      <img src="../assets/logout.png" alt=""></img>
+      <span className="d-block">Logout</span>
+    </li>
+  );
 };
 
 export default LogoutButton;
