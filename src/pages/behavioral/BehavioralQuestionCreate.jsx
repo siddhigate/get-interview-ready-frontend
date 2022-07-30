@@ -9,16 +9,18 @@ const BehavioralQuestionCreate = () => {
   const id = useParams();
   const navigate = useNavigate();
 
-  const [question, setQuestion] = useState({ question: "" });
+  const [question, setQuestion] = useState({ question: "", questionId: "x" });
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState("");
   const [error, setError] = useState("");
 
   function getQuestion() {
-    const q = BEHAVIORAL_QUESTIONS.find(
-      (question) => question.questionId === id.id
-    );
-    setQuestion(q);
+    if (id.id !== "new") {
+      const q = BEHAVIORAL_QUESTIONS.find(
+        (question) => question.questionId === id.id
+      );
+      setQuestion(q);
+    }
   }
 
   useEffect(() => {
@@ -27,12 +29,14 @@ const BehavioralQuestionCreate = () => {
 
   async function saveAnswer() {
     setLoading(true);
+    console.log(question, answer)
     setError("");
     try {
-      const res = await createBehavioralQuestion({...question, answer});
-
+      const res = await createBehavioralQuestion({ ...question, answer });
       console.log(res.data);
-      navigate(`/behavioral/${res.data.behavioralQuestion.id}`, { replace: true });
+      navigate(`/behavioral/${res.data.behavioralQuestion.id}`, {
+        replace: true,
+      });
       setLoading(false);
     } catch (err) {
       if (err?.response?.data?.message?.length > 0) {
@@ -57,10 +61,24 @@ const BehavioralQuestionCreate = () => {
           textTransform: "lowercase",
         }}
       >
-        <Link to="/behavioralquestions/all">Behavioral-Questions</Link>/Tell-me-about-yourself
+        <Link to="/behavioralquestions/all">Behavioral-Questions</Link>/
+        {question?.question?.replaceAll(" ", "-")}
       </p>
-      <h1 style={{ marginBottom: "1rem" }}>{question.question}</h1>
-      <button className="save-btn mb-md" onClick={saveAnswer} disabled={loading}>
+      {id.id !== "new" && (
+        <h1 style={{ marginBottom: "1rem" }}>{question?.question}</h1>
+      )}
+      {id.id === "new" && (
+        <input type="text" placeholder="Enter Question here"
+        style={{border: "none", borderBottom: "1px solid gray", fontSize: "2rem"}}
+        className="d-block mb-md"
+        onChange={e => setQuestion(q => ({...q, question: e.target.value}))}
+        ></input>
+      )}
+      <button
+        className="save-btn mb-md"
+        onClick={saveAnswer}
+        disabled={loading}
+      >
         {loading && "Saving"}
         {!loading && "Save"}
       </button>

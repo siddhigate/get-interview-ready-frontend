@@ -60,6 +60,7 @@ const BehavioralQuestionList = () => {
 
   return (
     <SidebarLayout title="Behavioral Questions">
+      <Link to="/behavioralcreate/new" className="save-btn mb-xl">Create new</Link>
       <ul className="tab-list list-style-none">
         <TabNavItem
           title="All"
@@ -80,6 +81,7 @@ const BehavioralQuestionList = () => {
           setActiveTab={setActiveTab}
         />
       </ul>
+      
       <TabContent id="tab1" activeTab={activeTab}>
         <GridContainer>
           {questions.allQuestions.map((data) =>
