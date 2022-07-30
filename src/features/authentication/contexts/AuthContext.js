@@ -6,11 +6,12 @@ const useAuth = () => useContext(AuthContext);
 
 const AuthContextProvider = ({ children }) => {
   const [auth, setAuth] = useState(() => {
-    const token = localStorage.getItem("token");
+    const token = JSON.parse(localStorage.getItem("token"));
+    const user = JSON.parse(localStorage.getItem("token"));
 
-    if (token) return { token, isAuth: true };
+    if (token) return { user, token, isAuth: true };
 
-    return { token: "", isAuth: false };
+    return { token: "", user: null, isAuth: false };
   });
 
   console.log(auth)

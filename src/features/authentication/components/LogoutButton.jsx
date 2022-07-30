@@ -8,7 +8,8 @@ const LogoutButton = () => {
   async function logout() {
     try {
       await logoutService();
-      setAuth({ token: "", isAuth: false });
+      localStorage.clear();
+      setAuth({ token: "", user: "", isAuth: false });
     } catch (err) {
       console.log(err);
     }
