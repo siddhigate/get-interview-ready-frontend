@@ -3,8 +3,7 @@ import { API_URL } from "../../../constants/api";
 
 export const updateBehavioralQuestion = async ({id, answer}) => {
   return await axios.patch(
-    `${API_URL}/behavioralQuestions/updateAnswer
-    }`,
+    `${API_URL}/behavioralQuestions/updateAnswer`,
     {
       id,
       answer

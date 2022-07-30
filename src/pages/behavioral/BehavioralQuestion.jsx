@@ -1,26 +1,30 @@
-import {useState, useEffect} from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom'
-import MarkdownEditor from '../../components/MarkdownEditor';
-import { getOneBehavioralQuestion } from '../../features/behavioral/services/getOneBehavioralQuestion';
-import { updateBehavioralQuestion } from '../../features/behavioral/services/updateBehavioralQuestion';
-import SidebarLayout from '../../layouts/SidebarLayout';
+import { useState, useEffect } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import MarkdownEditor from "../../components/MarkdownEditor";
+import { getOneBehavioralQuestion } from "../../features/behavioral/services/getOneBehavioralQuestion";
+import { updateBehavioralQuestion } from "../../features/behavioral/services/updateBehavioralQuestion";
+import SidebarLayout from "../../layouts/SidebarLayout";
 
 const BehavioralQuestion = () => {
-
   const id = useParams();
   const navigate = useNavigate();
 
-  const [question, setQuestion] = useState({ question: "", questionId: "", answer: "" });
+  const [question, setQuestion] = useState({
+    question: "",
+    questionId: "",
+    answer: "",
+  });
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState("");
   const [error, setError] = useState("");
 
   async function getQuestion() {
     try {
-      const res  = await getOneBehavioralQuestion(id.id);
-      console.log(res.data)
-      setQuestion(res.data.behavioralQuestion)
-    } catch(err) {
+      const res = await getOneBehavioralQuestion(id.id);
+      console.log(res.data);
+      setQuestion(res.data.behavioralQuestion);
+      setAnswer(res.data.behavioralQuestion.answer);
+    } catch (err) {
       console.log(err);
     }
   }
@@ -33,10 +37,8 @@ const BehavioralQuestion = () => {
     setLoading(true);
     setError("");
     try {
-      const res = await updateBehavioralQuestion({...question, answer});
-
+      const res = await updateBehavioralQuestion({ ...question, answer });
       console.log(res.data);
-      navigate(`/behavioral/${res.data.behavioralQuestion.id}`, { replace: true });
       setLoading(false);
     } catch (err) {
       if (err?.response?.data?.message?.length > 0) {
@@ -61,10 +63,15 @@ const BehavioralQuestion = () => {
           textTransform: "lowercase",
         }}
       >
-        <Link to="/behavioralquestions/all">Behavioral-Questions</Link>/{question.question.replace(" ", "-")}
+        <Link to="/behavioralquestions/all">Behavioral-Questions</Link>/
+        {question.question.replace(" ", "-")}
       </p>
       {<h1 style={{ marginBottom: "1rem" }}>{question.question}</h1>}
-      <button className="save-btn mb-md" onClick={saveAnswer} disabled={loading}>
+      <button
+        className="save-btn mb-md"
+        onClick={saveAnswer}
+        disabled={loading}
+      >
         {loading && "Saving"}
         {!loading && "Save"}
       </button>
@@ -77,9 +84,13 @@ const BehavioralQuestion = () => {
         </p>
       )}
 
-      <MarkdownEditor onChange={({ text }) => setAnswer(text)} defaultValue={question.answer} value={answer}></MarkdownEditor>
+      <MarkdownEditor
+        onChange={({ text }) => setAnswer(text)}
+        defaultValue={question.answer}
+        value={answer}
+      ></MarkdownEditor>
     </SidebarLayout>
   );
-}
+};
 
-export default BehavioralQuestion
+export default BehavioralQuestion;
