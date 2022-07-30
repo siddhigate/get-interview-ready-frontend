@@ -1,10 +1,8 @@
-import React from 'react'
+import React from "react";
 
-const Pill = ({count, text}) => {
-  
-  return (
-    <p className="bg-yellow-light">{text}</p>
-  )
-}
+const Pill = ({ count, text, color }) => {
 
-export default Pill
+  return <p className={`bg-${color}-light`}>{text}</p>;
+};
+
+export default Pill;

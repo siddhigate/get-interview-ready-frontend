@@ -14,7 +14,7 @@ const AuthContextProvider = ({ children }) => {
     return { token: "", user: null, isAuth: false };
   });
 
-  console.log(auth)
+  // console.log(auth)
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>
       {children}
