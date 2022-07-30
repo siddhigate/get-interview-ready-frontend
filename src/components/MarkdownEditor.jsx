@@ -3,7 +3,7 @@ import MdEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
-const MarkdownEditor = ({ height = "70vh", defaultValue, onChange }) => {
+const MarkdownEditor = ({ height = "70vh", defaultValue, value, onChange }) => {
   return (
     <MdEditor
       view={{ menu: true, md: true, html: false }}
@@ -17,6 +17,7 @@ const MarkdownEditor = ({ height = "70vh", defaultValue, onChange }) => {
       style={{ height: height }}
       renderHTML={(text) => mdParser.render(text)}
       defaultValue={defaultValue}
+      value={value}
       onChange={onChange}
     />
   );
