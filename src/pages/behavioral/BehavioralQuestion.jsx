@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import MarkdownEditor from "../../components/MarkdownEditor";
 import { getOneBehavioralQuestion } from "../../features/behavioral/services/getOneBehavioralQuestion";
 import { updateBehavioralQuestion } from "../../features/behavioral/services/updateBehavioralQuestion";
 import SidebarLayout from "../../layouts/SidebarLayout";
+import { showToast } from "../../utils/showToast";
 
 const BehavioralQuestion = () => {
   const id = useParams();
-  const navigate = useNavigate();
 
   const [question, setQuestion] = useState({
     question: "",
@@ -16,7 +16,6 @@ const BehavioralQuestion = () => {
   });
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState("");
-  const [error, setError] = useState("");
 
   async function getQuestion() {
     try {
@@ -35,19 +34,14 @@ const BehavioralQuestion = () => {
 
   async function saveAnswer() {
     setLoading(true);
-    setError("");
     try {
       const res = await updateBehavioralQuestion({ ...question, answer });
       console.log(res.data);
       setLoading(false);
+      showToast(true, "Answer updated successfully!");
     } catch (err) {
-      if (err?.response?.data?.message?.length > 0) {
-        setError(err.response.data.message);
-      } else if (err.code === "ERR_NETWORK") {
-        setError("Something went wrong, please check your network.");
-      } else {
-        setError("Something went wrong.");
-      }
+      showToast(false, "Answer updation failed");
+
       setLoading(false);
     }
   }
@@ -75,15 +69,6 @@ const BehavioralQuestion = () => {
         {loading && "Saving"}
         {!loading && "Save"}
       </button>
-      {error && (
-        <p
-          className="mt-md mb-md txt-red txt-center"
-          style={{ fontSize: "0.9rem" }}
-        >
-          {error}
-        </p>
-      )}
-
       <MarkdownEditor
         onChange={({ text }) => setAnswer(text)}
         defaultValue={question.answer}
