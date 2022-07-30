@@ -10,7 +10,7 @@ const Card = ({ date, title, pills }) => {
       </div>
       <div className="tech-pills">
         {pills.map((pill) => (
-          <Pill text={pill.text} color={pill.color}></Pill>
+          <Pill key={Math.random()} text={pill.text} color={pill.color}></Pill>
         ))}
       </div>
       <i className="fa-solid fa-ellipsis-vertical ellipsis-icon question-options"></i>
