@@ -37,7 +37,7 @@ const SidebarLayout = ({title, children}) => {
         </aside>
         <main className="main-wrapper">
 
-            <h1>{title}</h1>
+        {title && <h1>{title}</h1>}
 
             <div className="content">
                 {children}
