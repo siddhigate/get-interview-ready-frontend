@@ -3,8 +3,7 @@ import { API_URL } from "../../../constants/api";
 
 export const createBehavioralQuestion = async ({questionId, question, answer}) => {
   return await axios.post(
-    `${API_URL}/behavioralQuestions/createBehavioralQuestion
-    }`,
+    `${API_URL}/behavioralQuestions/createBehavioralQuestion`,
     {
         questionId,
         question,

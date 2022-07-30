@@ -1,0 +1,8 @@
+.save-btn {
+    padding: 0.25rem 1rem;
+    background-color: var(--clr-green);
+    border: 1px solid var(--clr-green);
+    border-radius: 3px;
+    color: white;
+    font-size: 0.9rem;
+}
