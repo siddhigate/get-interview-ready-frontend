@@ -8,13 +8,22 @@ const LogoutButton = () => {
   async function logout() {
     try {
       await logoutService();
-      setAuth({ token: "", isAuth: false });
+      localStorage.clear();
+      setAuth({ token: "", user: "", isAuth: false });
     } catch (err) {
       console.log(err);
     }
   }
 
-  return <button onClick={logout}>LogoutButton</button>;
+  return (
+    <li
+      style={{ borderTop: "1px solid gray", paddingTop: "1rem" }}
+      onClick={logout}
+    >
+      <img src="../assets/logout.png" alt=""></img>
+      <span className="d-block">Logout</span>
+    </li>
+  );
 };
 
 export default LogoutButton;

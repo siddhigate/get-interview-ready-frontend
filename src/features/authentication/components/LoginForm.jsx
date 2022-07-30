@@ -1,23 +1,45 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { loginService } from "../services/loginService";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
 const LoginForm = () => {
   const { auth, setAuth } = useAuth();
-  
+  const [loading, setLoading] = useState();
+  const [error, setError] = useState("");
+
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from.pathname || "/";
 
   async function login(user) {
+    setLoading(true);
+    setError("");
     try {
       const res = await loginService(user);
-      localStorage.setItem("token", res.data.token);
-      setAuth({ token: res.data.token, isAuth: true });
-      navigate(from, { replace: true });
+      console.log(res.data);
+
+      if (res.data.success) {
+        const { user, token } = res.data;
+        localStorage.setItem("token", JSON.stringify(token));
+        localStorage.setItem("user", JSON.stringify(user));
+        setAuth({ user, token, isAuth: true });
+        navigate(from, { replace: true });
+      } else {
+        setError("Something went wrong.");
+      }
+
+      setLoading(false);
     } catch (err) {
-      console.log(err);
+      if(err?.response?.data?.message?.length > 0) {
+        setError(err.response.data.message);
+      }
+      else if(err.code === "ERR_NETWORK") {
+        setError("Something went wrong, please check your network.")
+      } else {
+        setError("Something went wrong.")
+      }
+      setLoading(false);
     }
   }
 
@@ -31,14 +53,16 @@ const LoginForm = () => {
     }
 
     login(user);
+
+    // fetch("https://get-interview-ready-backend.herokuapp.com").then(() => console.log("done"));
   };
 
   useEffect(() => {
-    console.log(auth.isAuth)
-    if(auth.isAuth) {
-        navigate("/", { replace: true });
+    console.log(auth.isAuth);
+    if (auth.isAuth) {
+      navigate("/", { replace: true });
     }
-  }, [auth.isAuth, navigate])
+  }, [auth.isAuth, navigate]);
 
   return (
     <div className="min-height-90 flex flex-justify-center flex-items-center">
@@ -55,6 +79,8 @@ const LoginForm = () => {
               className="form-control"
               placeholder="mail@domain.com"
               name="email"
+              onChange={() => setError("")}
+              required
             />
           </div>
 
@@ -69,19 +95,30 @@ const LoginForm = () => {
                 className="form-control"
                 placeholder="*******"
                 name="password"
+                onChange={() => setError("")}
+                required
               />
               <i className="fas fa-eye-slash icon-eye"></i>
             </div>
           </div>
-
-          <button className="btn btn-primary width-100"> Login </button>
+          <div
+            className="mt-md mb-md txt-red txt-center"
+            style={{ fontSize: "0.9rem" }}
+          >
+            {error && <p>{error}</p>}
+          </div>
+          <button className="btn btn-primary width-100" disabled={loading}>
+            {" "}
+            Login{" "}
+          </button>
         </form>
-        <a href="./login.html" className="link">
+
+        <Link to="/signup">
           <p className="txt-gray txt-center mt-md">
             Don't have an account?
             <span className="txt-primary width-100">Sign up</span>
           </p>
-        </a>
+        </Link>
       </main>
     </div>
   );

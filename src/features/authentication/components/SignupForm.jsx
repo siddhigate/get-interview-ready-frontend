@@ -1,23 +1,44 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { signupService } from "../services/signupService";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
 const SignupForm = () => {
   const { auth, setAuth } = useAuth();
+  const [loading, setLoading] = useState();
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from.pathname || "/";
 
   async function signup(user) {
+    setLoading(true);
     try {
+      console.log(user)
       const res = await signupService(user);
-      localStorage.setItem("token", res.data.token);
-      setAuth({ token: res.data.token, isAuth: true });
-      navigate(from, { replace: true });
+
+      if (res.data.success) {
+        const { user, token } = res.data;
+        localStorage.setItem("token", JSON.stringify(token));
+        localStorage.setItem("user", JSON.stringify(user));
+        setAuth({ user, token, isAuth: true });
+        navigate(from, { replace: true });
+      } else {
+        setError("Something went wrong.");
+      }
+
+      setLoading(false);
     } catch (err) {
-      console.log(err);
+      console.log(err)
+      if (err?.response?.data?.message?.length > 0) {
+        setError(err.response.data.message);
+      } else if (err.code === "ERR_NETWORK") {
+        setError("Something went wrong, please check your network.");
+      } else {
+        setError("Something went wrong.");
+      }
+      setLoading(false);
     }
   }
 
@@ -29,7 +50,7 @@ const SignupForm = () => {
     for (const [key, value] of formData) {
       user[key] = value;
     }
-
+    console.log(user)
     signup(user);
   };
 
@@ -55,7 +76,9 @@ const SignupForm = () => {
               type="text"
               className="form-control"
               placeholder="First name"
-              name="fullname"
+              name="full_name"
+              onChange={() => setError("")}
+              required
             />
           </div>
 
@@ -69,6 +92,8 @@ const SignupForm = () => {
               className="form-control"
               placeholder="mail@domain.com"
               name="email"
+              onChange={() => setError("")}
+              required
             />
           </div>
 
@@ -83,19 +108,29 @@ const SignupForm = () => {
                 className="form-control"
                 placeholder="*********"
                 name="password"
+                onChange={() => setError("")}
+                required
               />
               <i className="fas fa-eye-slash icon-eye"></i>
             </div>
           </div>
-
-          <button className="btn btn-primary width-100"> Sign up </button>
+          <div
+            className="mt-md mb-md txt-red txt-center"
+            style={{ fontSize: "0.9rem" }}
+          >
+            {error && <p>{error}</p>}
+          </div>
+          <button className="btn btn-primary width-100" disabled={loading}>
+            {" "}
+            Sign up{" "}
+          </button>
         </form>
-        <a href="./signup.html" className="link">
+        <Link to="/login">
           <p className="txt-gray txt-center mt-md">
             Already have an account?
             <span className="txt-primary width-100">Login</span>
           </p>
-        </a>
+        </Link>
       </main>
     </div>
   );

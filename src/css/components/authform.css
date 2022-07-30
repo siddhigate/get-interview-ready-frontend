@@ -22,6 +22,10 @@
     background-color: var(--clr-blue-dark);
 }
 
+.auth-form button:disabled {
+  opacity: 0.5;
+  cursor: no-drop;
+}
 .auth-form .form-control-wrapper {
     margin: 1rem 0;
 }
