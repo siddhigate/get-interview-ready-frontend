@@ -64,6 +64,7 @@ const FlashCardsList = () => {
         <GridContainer>
           {decks.map((data) => (
             <FlashCard
+              key={Math.random()}
               data={data.date}
               question={data.question}
               answer={data.answer}
@@ -72,7 +73,7 @@ const FlashCardsList = () => {
         </GridContainer>
       </TabContent>
       <TabContent id="tab2" activeTab={activeTab}>
-        <FlashCardsTest cards={decks}></FlashCardsTest>
+        <FlashCardsTest cards={decks} id={id}></FlashCardsTest>
       </TabContent>
 
       {showModal && (
