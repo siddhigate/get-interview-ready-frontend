@@ -5,7 +5,7 @@
     top: 0;
     left: 0;
     background-color: var(--clr-gray-opacity);
-    z-index: 9999;
+    z-index: 9998;
 }
 
 .modal {
@@ -17,6 +17,7 @@
     padding: 2em;
     background: white;
     box-shadow: var(--bs-gray-dark);
+    z-index: 9999;
 }
 
 .modal-content {
@@ -24,6 +25,7 @@
     flex-direction: column;
     gap: 1rem;
     justify-content: center;
+    z-index: 9999;
 }
 
 .modal-close-btn {
