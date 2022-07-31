@@ -8,9 +8,13 @@ import { getOneFlashcardsDeck } from "../../features/flashcards/services/getOneF
 import SidebarLayout from "../../layouts/SidebarLayout";
 import { getFormattedDate } from "../../utils/getFormattedDate";
 
+import TabContent from "../../components/Tab/TabContent";
+import TabNavItem from "../../components/Tab/TabNavItem";
+
 const FlashCardsList = () => {
   const [showModal, setShowModal] = useState(false);
   const [decks, setDecks] = useState([]);
+  const [activeTab, setActiveTab] = useState("tab1");
 
   const { id } = useParams();
 
@@ -38,10 +42,26 @@ const FlashCardsList = () => {
       <h1>Flash Cards</h1>
       <button
         onClick={() => setShowModal(true)}
-        className="save-btn mb-xl mt-xl"
+        className="save-btn mt-xl"
       >
         Create new
       </button>
+
+      <ul className="tab-list list-style-none">
+        <TabNavItem
+          title="Cards"
+          id="tab1"
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        />
+        <TabNavItem
+          title="Test"
+          id="tab2"
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        />
+      </ul>
+      <TabContent id="tab1" activeTab={activeTab}>
       <GridContainer>
         {decks.map((data) => (
           <Card
@@ -52,6 +72,10 @@ const FlashCardsList = () => {
           ></Card>
         ))}
       </GridContainer>
+      </TabContent>
+      <TabContent id="tab2" activeTab={activeTab}>
+        Test
+      </TabContent>
 
       {showModal && (
         <Modal title="Add Flash card" closeModal={() => setShowModal(false)}>
