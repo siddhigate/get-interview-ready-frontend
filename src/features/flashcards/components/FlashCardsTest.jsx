@@ -28,7 +28,7 @@ const FlashCardsTest = ({ cards, id, name }) => {
         deck_id: id,
         name,
         num_of_questions: testCards.length,
-        score: results.filter((el) => el === true).length / testCards.length,
+        score: results.filter((el) => el === true).length + 1,
       });
     } catch (err) {
       console.log(err)

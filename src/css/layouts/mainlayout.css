@@ -63,17 +63,15 @@
         left: 10px;
     }
 
-
-
 }
 
 
 .h-40 {
-    height: 50vh;
+    min-height: 50vh;
 }
 
 .h-30 {
-    height: 30vh;
+    min-height: 30vh;
 }
 
 .row-70-30 {
@@ -120,4 +118,19 @@
 .card-with-shadow {
     background-color: white;
     box-shadow: 0 1px 25px rgba(101, 111, 122, 0.15);
+}
+
+@media (max-width: 1200px) { 
+    .row-70-30 {
+        flex-direction: column;
+    }
+
+    .row-70-30 > div {
+        width: 90%;
+        margin: auto;
+    }
+
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
 }
