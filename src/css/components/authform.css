@@ -100,7 +100,8 @@
 }
 .form-control[type="text"],
 .form-control[type="email"],
-.form-control[type="password"] {
+.form-control[type="password"],
+.form-control[type="url"] {
   width: 100%;
   border-radius: 4px;
   padding: 0.5rem;
@@ -111,13 +112,15 @@
 
 .form-control[type="text"]:focus,
 .form-control[type="email"]:focus,
-.form-control[type="password"]:focus {
+.form-control[type="password"]:focus,
+.form-control[type="url"]:focus {
   border: 2px solid var(--clr-primary);
 }
 
 .form-control[type="text"]:hover,
 .form-control[type="email"]:hover,
-.form-control[type="password"]:hover {
+.form-control[type="password"]:hover,
+.form-control[type="url"]:hover {
   box-shadow: var(--bs-gray);
 }
 
