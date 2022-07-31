@@ -17,12 +17,14 @@ const FlashCardsList = () => {
   const [showModal, setShowModal] = useState(false);
   const [decks, setDecks] = useState([]);
   const [activeTab, setActiveTab] = useState("tab1");
+  const [name, setName] = useState("")
 
   const { id } = useParams();
 
   async function getCards() {
     try {
       const res = await getOneFlashcardsDeck(id);
+      setName(res.data.deckName)
       const deckCards = res.data.flashCards.map((deck) => ({
         ...deck,
         pills: [],
@@ -41,7 +43,7 @@ const FlashCardsList = () => {
 
   return (
     <SidebarLayout>
-      <h1>Flash Cards</h1>
+      <h1>Flash Cards: {name}</h1>
       <button onClick={() => setShowModal(true)} className="save-btn mt-xl">
         Create new
       </button>
@@ -73,7 +75,7 @@ const FlashCardsList = () => {
         </GridContainer>
       </TabContent>
       <TabContent id="tab2" activeTab={activeTab}>
-        <FlashCardsTest cards={decks} id={id}></FlashCardsTest>
+        <FlashCardsTest cards={decks} id={id} name={name}></FlashCardsTest>
       </TabContent>
 
       {showModal && (

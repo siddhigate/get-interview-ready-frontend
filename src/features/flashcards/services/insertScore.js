@@ -1,7 +1,12 @@
 import axios from "axios";
 import { API_URL } from "../../../constants/api";
 
-export const insertScore = async ({ name, deck_id, num_of_questions, score }) => {
+export const insertScore = async ({
+  name,
+  deck_id,
+  num_of_questions,
+  score,
+}) => {
   return await axios.post(
     `${API_URL}/flashCards/insertTestScore`,
     {

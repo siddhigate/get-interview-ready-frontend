@@ -4,7 +4,7 @@ import Modal from "../../../components/Modal";
 import { insertScore } from "../services/insertScore";
 import FlashCard from "./FlashCard";
 
-const FlashCardsTest = ({ cards, id }) => {
+const FlashCardsTest = ({ cards, id, name }) => {
   const [currIndex, setCurrIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [results, setResults] = useState([]);
@@ -12,14 +12,30 @@ const FlashCardsTest = ({ cards, id }) => {
   const [showResultModal, setShowResultModal] = useState(false);
 
   function startTest() {
-    const shuffled = cards.sort(() => 0.5 - Math.random());
-    setTestCards(shuffled.slice(0, 5));
-    setResults([...testCards].map(() => false));
+    const shuffled = cards.sort(() => 0.5 - Math.random()).slice(0, 5);
+    setTestCards(shuffled);
+
+    setResults([...shuffled].map(() => false));
   }
 
   useEffect(() => {
     startTest();
   }, []);
+
+  async function saveScore() {
+    try {
+      const res = await insertScore({
+        deck_id: id,
+        name,
+        num_of_questions: testCards.length,
+        score: results.filter((el) => el === true).length / testCards.length,
+      });
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  console.log(results);
 
   return (
     <div style={{ maxWidth: "650px", margin: "auto" }}>
@@ -128,7 +144,7 @@ const FlashCardsTest = ({ cards, id }) => {
               cursor: "pointer",
               marginTop: "1rem",
             }}
-            onClick={() => setShowResultModal(true)}
+            onClick={() => {setShowResultModal(true); saveScore();}}
           >
             Submit Test
           </button>
@@ -144,7 +160,9 @@ const FlashCardsTest = ({ cards, id }) => {
             <button
               className="btn save-btn mt-md"
               style={{ padding: "0.5rem 3rem" }}
-              onClick={() => setShowResultModal(false)}
+              onClick={() => {
+                setShowResultModal(false);
+              }}
             >
               Done
             </button>
