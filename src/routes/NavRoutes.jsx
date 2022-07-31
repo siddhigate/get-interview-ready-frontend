@@ -21,6 +21,7 @@ const NavRoutes = () => {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/welcome" element={<Landing />}></Route>
   
       <Route path="/" element={<ProtectedRoutes />}>
         <Route path="/" element={<Dashboard></Dashboard>}></Route>
