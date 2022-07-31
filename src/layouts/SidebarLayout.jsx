@@ -23,10 +23,12 @@ const SidebarLayout = ({ title, children }) => {
               <img src="../assets/technical.png" alt=""></img>
               <span className="d-block">Technical Questions</span>
             </li>
-            <li>
-              <img src="../assets/project.png" alt=""></img>
-              <span className="d-block">Project Questions</span>
-            </li>
+            <Link to="/projects">
+              <li>
+                <img src="../assets/project.png" alt=""></img>
+                <span className="d-block">Project Questions</span>
+              </li>
+            </Link>
             <li>
               <img src="../assets/flashcard.png" alt=""></img>
               <span className="d-block">Flash cards</span>

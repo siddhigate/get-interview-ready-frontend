@@ -27,6 +27,10 @@
     gap: 2rem;
 }
 
+.card-link {
+    display: grid;
+}
+
 @media (max-width: 1200px) {
     .grid-container {
         grid-template-columns:  1fr 1fr;

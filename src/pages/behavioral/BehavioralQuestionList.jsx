@@ -86,7 +86,7 @@ const BehavioralQuestionList = () => {
         <GridContainer>
           {questions.allQuestions.map((data) =>
             data.answered ? (
-              <Link to={`/behavioral/${data.id}`}>
+              <Link to={`/behavioral/${data.id}`} className="card-link">
                 <Card
                   key={Math.random()}
                   date={data.date}
@@ -95,7 +95,7 @@ const BehavioralQuestionList = () => {
                 ></Card>
               </Link>
             ) : (
-              <Link to={`/behavioralcreate/${data.questionId}`}>
+              <Link to={`/behavioralcreate/${data.questionId}`} className="card-link">
                 <Card
                   key={Math.random()}
                   date={data.date}
@@ -110,7 +110,7 @@ const BehavioralQuestionList = () => {
       <TabContent id="tab2" activeTab={activeTab}>
         <GridContainer>
           {questions.answeredQuestions.map((data) => (
-            <Link to={`/behavioral/${data.id}`}>
+            <Link to={`/behavioral/${data.id}`} className="card-link">
               <Card
                 key={Math.random()}
                 date={data.date}
@@ -124,7 +124,7 @@ const BehavioralQuestionList = () => {
       <TabContent id="tab3" activeTab={activeTab}>
         <GridContainer>
           {questions.unansweredQuestions.map((data) => (
-            <Link to={`/behavioralcreate/${data.questionId}`}>
+            <Link to={`/behavioralcreate/${data.questionId}`} className="card-link">
               <Card
                 key={Math.random()}
                 date={data.date}

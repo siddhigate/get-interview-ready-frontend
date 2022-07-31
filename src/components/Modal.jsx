@@ -1,8 +1,8 @@
-import React from "react";
+import ReactDOM from "react-dom";
 
-const Modal = ({title, closeModal, children}) => {
-  return (
-    <div className="modal-background" onClick={closeModal}>
+const Modal = ({title, closeModal, closeOnBackdrop, children}) => {
+  return ReactDOM.createPortal(
+    <div className="modal-background" onClick={closeOnBackdrop}>
       <div className="modal">
         <div className="modal-content">
           <button className="modal-close-btn" onClick={closeModal}>
@@ -16,7 +16,7 @@ const Modal = ({title, closeModal, children}) => {
           
         </div>
       </div>
-    </div>
+    </div>, document.body
   );
 };
 

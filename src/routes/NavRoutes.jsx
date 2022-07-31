@@ -5,6 +5,8 @@ import BehavioralQuestion from "../pages/behavioral/BehavioralQuestion";
 import BehavioralQuestionCreate from "../pages/behavioral/BehavioralQuestionCreate";
 import BehavioralQuestionList from "../pages/behavioral/BehavioralQuestionList";
 import Dashboard from "../pages/dashboard/Dashboard";
+import Project from "../pages/project/Project";
+import ProjectList from "../pages/project/ProjectList";
 import { ProtectedRoutes } from "./ProtectedRoutes";
 
 const NavRoutes = () => {
@@ -18,6 +20,8 @@ const NavRoutes = () => {
             <Route path="/behavioralquestions/all" element={<BehavioralQuestionList></BehavioralQuestionList>}></Route>
             <Route path="/behavioral/:id" element={<BehavioralQuestion></BehavioralQuestion>}></Route>
             <Route path="/behavioralcreate/:id" element={<BehavioralQuestionCreate></BehavioralQuestionCreate>}></Route>
+            <Route path="/projects" element={<ProjectList></ProjectList>}></Route>
+            <Route path="/project/:id" element={<Project></Project>}></Route>
         </Route>
     </Routes>
   )
