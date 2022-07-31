@@ -19,10 +19,12 @@ const SidebarLayout = ({ title, children }) => {
                 <span className="d-block">Behavioral Questions</span>
               </li>
             </Link>
-            <li>
-              <img src="../assets/technical.png" alt=""></img>
-              <span className="d-block">Technical Questions</span>
-            </li>
+            <Link to="/technicalquestions">
+              <li>
+                <img src="../assets/technical.png" alt=""></img>
+                <span className="d-block">Technical Questions</span>
+              </li>
+            </Link>
             <Link to="/projects">
               <li>
                 <img src="../assets/project.png" alt=""></img>
