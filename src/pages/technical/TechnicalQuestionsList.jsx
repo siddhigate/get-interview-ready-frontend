@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Card from "../../components/Card/Card";
 import GridContainer from "../../components/GridContainer";
+import Modal from "../../components/Modal";
+import AddQuestion from "../../features/technical/components/AddQuestion";
 import { getAllTechnicalQuestions } from "../../features/technical/services/getAllTechnicalQuestions";
 import SidebarLayout from "../../layouts/SidebarLayout";
 import { getFormattedDate } from "../../utils/getFormattedDate";
@@ -35,6 +37,9 @@ const TechnicalQuestionsList = () => {
 
   return (
     <SidebarLayout title="Technical Questions">
+      <button onClick={() => setShowModal(true)} className="save-btn mb-xl">
+        Create new
+      </button>
       <GridContainer>
         {questions.map((data) => (
           <Link
@@ -50,6 +55,12 @@ const TechnicalQuestionsList = () => {
           </Link>
         ))}
       </GridContainer>
+
+      {
+        showModal && <Modal title="Add Question" closeModal={() => setShowModal(false)}>
+          <AddQuestion></AddQuestion>
+        </Modal>
+      }
       
     </SidebarLayout>
   );
