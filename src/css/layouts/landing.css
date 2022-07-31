@@ -1,0 +1,39 @@
+.main-landing-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 800px;
+    text-align: center;
+    margin: 3rem auto;
+}
+
+.main-landing-container h1 {
+    font-size: 3rem;
+    margin: 2rem;
+}
+
+.main-landing-container p {
+    font-size: 1.2rem;
+    color: gray;
+}
+
+.main-landing-container img {
+    max-width: 500px;
+}
+
+.landing-login-link {
+    margin: 2rem 1rem 1rem 1rem;
+    background-color: var(--clr-blue-light);
+    padding: 0.75rem 3rem;
+    border-radius: 3px;
+
+}
+
+.landing-login-link:hover {
+    background-color: var(--clr-blue);
+}
+
+.landing-footer img {
+    width: 100px;
+}
