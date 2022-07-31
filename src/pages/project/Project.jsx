@@ -50,6 +50,10 @@ const Project = () => {
     }
   }
 
+  if(fetchLoading) {
+    return <SidebarLayout><Loader></Loader></SidebarLayout>
+  }
+
   return (
     <SidebarLayout>
       <p
@@ -61,10 +65,6 @@ const Project = () => {
           textTransform: "lowercase",
         }}
       >
-
-        {
-          fetchLoading && <Loader></Loader>
-        }
         <Link to="/projects">Projects</Link>/{project.name.replace(" ", "-")}
       </p>
       <h1 style={{ marginBottom: "1rem" }}>{project.name}</h1>

@@ -40,13 +40,23 @@ const TechnicalQuestionsList = () => {
     fetchQuestions();
   }, []);
 
+  if (loading) {
+    return <SidebarLayout title="Projects">
+       <Loader></Loader>
+    </SidebarLayout>
+  }
+
+
   return (
     <SidebarLayout title="Technical Questions">
       <button onClick={() => setShowModal(true)} className="save-btn mb-xl">
         Create new
       </button>
       {
-        loading && <Loader></Loader>
+        questions.length === 0 && <div className="flex-center flex-col">
+          <img src="./assets/empty.svg" alt="empty"/>
+          <p style={{margin: "1rem", fontSize: "1.25rem"}}>No projects! Create new projects.</p>
+        </div>
       }
       <GridContainer>
         {questions.map((data) => (

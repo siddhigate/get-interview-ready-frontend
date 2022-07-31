@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Embed from "../../components/Embed/Embed";
+import Loader from "../../components/Loader";
 import MarkdownEditor from "../../components/MarkdownEditor";
 import Modal from "../../components/Modal";
 import TabContent from "../../components/Tab/TabContent";
@@ -19,8 +20,10 @@ const TechnicalQuestion = () => {
   const [loading, setLoading] = useState(false);
   const [solutionURL, setSolutionURL] = useState({ type: null, url: null });
   const [showModal, setShowModal] = useState(false);
+  const [fetchLoading, setFetchLoading] = useState(false)
 
   const getProject = async () => {
+    setFetchLoading(true);
     try {
       const res = await getOneTechnicalQuestion(id);
       const { question, solution, solution_url, solution_type } = res.data?.project;
@@ -38,6 +41,8 @@ const TechnicalQuestion = () => {
       });
     } catch (err) {
       console.log(err);
+    } finally {
+      setFetchLoading(false);
     }
   };
 
@@ -58,6 +63,10 @@ const TechnicalQuestion = () => {
 
       setLoading(false);
     }
+  }
+
+  if(fetchLoading) {
+    return <SidebarLayout><Loader></Loader></SidebarLayout>
   }
 
   return (

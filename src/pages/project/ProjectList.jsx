@@ -32,7 +32,7 @@ const ProjectList = () => {
     } catch (err) {
       console.log(err);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
@@ -40,20 +40,33 @@ const ProjectList = () => {
     fetchProjects();
   }, []);
 
+  if (loading) {
+    return <SidebarLayout title="Projects">
+       <Loader></Loader>
+    </SidebarLayout>
+  }
+
   return (
     <SidebarLayout title="Projects">
       <button onClick={() => setShowModal(true)} className="save-btn mb-xl">
         Create new
       </button>
-      {
-        loading && <Loader></Loader>
-      }
-      {
-        projects?.length === 0 && <div>Add projects to practice its interview questions.</div>
-      }
+
+      {projects.length === 0 && (
+        <div className="flex-center flex-col">
+          <img src="./assets/empty.svg" alt="empty" />
+          <p style={{ margin: "1rem", fontSize: "1.25rem" }}>
+            No projects! Create new projects.
+          </p>
+        </div>
+      )}
       <GridContainer>
         {projects.map((data) => (
-          <Link to={`/project/${data.id}`} key={Math.random()} className="card-link">
+          <Link
+            to={`/project/${data.id}`}
+            key={Math.random()}
+            className="card-link"
+          >
             <Card
               date={data.date}
               desc={data.tagline}
@@ -64,10 +77,7 @@ const ProjectList = () => {
         ))}
       </GridContainer>
       {showModal && (
-        <Modal
-          title="Add Project"
-          closeModal={() => setShowModal(false)}
-        >
+        <Modal title="Add Project" closeModal={() => setShowModal(false)}>
           <AddProject></AddProject>
         </Modal>
       )}
