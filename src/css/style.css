@@ -10,6 +10,7 @@
 @import './components/authform.css';
 @import './components/flashcard.css';
 @import './components/loader.css';
+@import './components/checkbox.css';
 
 @import './layouts/createform.css';
 @import './layouts/embedbtns.css';
