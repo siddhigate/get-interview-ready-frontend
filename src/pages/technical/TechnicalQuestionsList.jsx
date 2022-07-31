@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Card from "../../components/Card/Card";
 import GridContainer from "../../components/GridContainer";
+import Loader from "../../components/Loader";
 import Modal from "../../components/Modal";
 import AddQuestion from "../../features/technical/components/AddQuestion";
 import { getAllTechnicalQuestions } from "../../features/technical/services/getAllTechnicalQuestions";
@@ -11,8 +12,10 @@ import { getFormattedDate } from "../../utils/getFormattedDate";
 const TechnicalQuestionsList = () => {
   const [showModal, setShowModal] = useState(false);
   const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   async function fetchQuestions() {
+    setLoading(true);
     try {
       const res = await getAllTechnicalQuestions();
       const questionsCards = res.data.technicalQuestions.map((project) => ({
@@ -28,6 +31,8 @@ const TechnicalQuestionsList = () => {
       setQuestions(questionsCards);
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -40,6 +45,9 @@ const TechnicalQuestionsList = () => {
       <button onClick={() => setShowModal(true)} className="save-btn mb-xl">
         Create new
       </button>
+      {
+        loading && <Loader></Loader>
+      }
       <GridContainer>
         {questions.map((data) => (
           <Link

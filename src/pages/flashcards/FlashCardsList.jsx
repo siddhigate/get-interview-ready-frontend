@@ -12,16 +12,19 @@ import TabContent from "../../components/Tab/TabContent";
 import TabNavItem from "../../components/Tab/TabNavItem";
 import FlashCard from "../../features/flashcards/components/FlashCard";
 import FlashCardsTest from "../../features/flashcards/components/FlashCardsTest";
+import Loader from "../../components/Loader";
 
 const FlashCardsList = () => {
   const [showModal, setShowModal] = useState(false);
   const [decks, setDecks] = useState([]);
   const [activeTab, setActiveTab] = useState("tab1");
   const [name, setName] = useState("")
+  const [loading, setLoading] = useState(false);
 
   const { id } = useParams();
 
   async function getCards() {
+    setLoading(true)
     try {
       const res = await getOneFlashcardsDeck(id);
       setName(res.data.deckName)
@@ -30,10 +33,11 @@ const FlashCardsList = () => {
         pills: [],
         date: getFormattedDate(deck.updated_at),
       }));
-
       setDecks(deckCards);
+      setLoading(false);
     } catch (err) {
       console.log(err);
+      setLoading(false);
     }
   }
 
@@ -44,6 +48,10 @@ const FlashCardsList = () => {
   return (
     <SidebarLayout>
       <h1>Flash Cards: {name}</h1>
+
+      {
+        loading && <Loader></Loader>
+      }
       <button onClick={() => setShowModal(true)} className="save-btn mt-xl">
         Create new
       </button>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import Loader from "../../components/Loader";
 import MarkdownEditor from "../../components/MarkdownEditor";
 import { getOneBehavioralQuestion } from "../../features/behavioral/services/getOneBehavioralQuestion";
 import { updateBehavioralQuestion } from "../../features/behavioral/services/updateBehavioralQuestion";
@@ -16,8 +17,10 @@ const BehavioralQuestion = () => {
   });
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState("");
+  const [fetchloading, setFetchLoading] = useState(false);
 
   async function getQuestion() {
+    setFetchLoading(true);
     try {
       const res = await getOneBehavioralQuestion(id.id);
       console.log(res.data);
@@ -25,9 +28,11 @@ const BehavioralQuestion = () => {
       setAnswer(res.data.behavioralQuestion.answer);
     } catch (err) {
       console.log(err);
+    } finally {
+      setFetchLoading(false);
     }
   }
-
+  
   useEffect(() => {
     getQuestion();
   }, []);
@@ -57,6 +62,10 @@ const BehavioralQuestion = () => {
           textTransform: "lowercase",
         }}
       >
+
+        {
+          fetchloading && <Loader></Loader>
+        }
         <Link to="/behavioralquestions/all">Behavioral-Questions</Link>/
         {question.question.replace(" ", "-")}
       </p>

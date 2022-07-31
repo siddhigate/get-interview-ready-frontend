@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Loader from "../../components/Loader";
 import { LineChart } from "../../features/dashboard/components/LineChart";
 import PieChart from "../../features/dashboard/components/PieChart";
 import { getDashboardData } from "../../features/dashboard/services/getDashboardData";
@@ -6,15 +7,19 @@ import SidebarLayout from "../../layouts/SidebarLayout";
 
 const Dashboard = () => {
   const [data, setData] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
       try {
         const res = await getDashboardData();
         console.log(res.data.stats);
         setData(res.data);
+        setLoading(false);
       } catch (err) {
         console.log(err);
+        setLoading(false)
       }
     };
     fetchData();
@@ -22,6 +27,9 @@ const Dashboard = () => {
 
   return (
     <SidebarLayout title="Dashboard">
+      {
+        loading && <Loader></Loader>
+      }
       {data && (
         <div className="main-content-wrapper">
           <div className="row-70-30 h-40">

@@ -7,9 +7,11 @@ import Card from "../../components/Card/Card";
 import { BEHAVIORAL_QUESTIONS } from "../../features/behavioral/data/behavioralQuestions";
 import { getAllBehavioralQuestions } from "../../features/behavioral/services/getAllBehavioralQuestions";
 import { Link } from "react-router-dom";
+import Loader from "../../components/Loader";
 
 const BehavioralQuestionList = () => {
   const [activeTab, setActiveTab] = useState("tab1");
+  const [loading, setLoading] = useState(false);
 
   const [questions, setQuestions] = useState({
     allQuestions: [],
@@ -18,6 +20,7 @@ const BehavioralQuestionList = () => {
   });
 
   async function fetchBehavioralQuestions() {
+    setLoading(true);
     try {
       const res = await getAllBehavioralQuestions();
       console.log(res.data);
@@ -51,6 +54,8 @@ const BehavioralQuestionList = () => {
       });
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -60,6 +65,11 @@ const BehavioralQuestionList = () => {
 
   return (
     <SidebarLayout title="Behavioral Questions">
+
+      {
+        loading && <Loader></Loader>
+      }
+
       <Link to="/behavioralcreate/new" className="save-btn mb-xl">Create new</Link>
       <ul className="tab-list list-style-none">
         <TabNavItem

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Card from "../../components/Card/Card";
 import GridContainer from "../../components/GridContainer";
+import Loader from "../../components/Loader";
 import Modal from "../../components/Modal";
 import AddFlashcardDeck from "../../features/flashcards/components/AddFlashcardDeck";
 import { getAllFlashCardsDecks } from "../../features/flashcards/services/getAllFlashcardsDecks";
@@ -12,8 +13,10 @@ import { getFormattedDate } from "../../utils/getFormattedDate";
 const FlashCardDecksList = () => {
   const [showModal, setShowModal] = useState(false);
   const [decks, setDecks] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   async function getDecks() {
+    setLoading(true);
     try {
       const res = await getAllFlashCardsDecks();
       const deckCards = res.data.decks.map((deck) => ({
@@ -26,8 +29,8 @@ const FlashCardDecksList = () => {
         ],
         date: getFormattedDate(deck.updated_at),
       }));
-
       setDecks(deckCards);
+      setLoading(false)
     } catch (err) {
       console.log(err);
     }
@@ -40,6 +43,9 @@ const FlashCardDecksList = () => {
   return (
     <SidebarLayout>
       <h1>Flash Card Decks</h1>
+      {
+        loading && <Loader></Loader>
+      }
       <button onClick={() => setShowModal(true)} className="save-btn mb-xl mt-xl">
         Create new
       </button>

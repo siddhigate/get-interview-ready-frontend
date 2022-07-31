@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Card from "../../components/Card/Card";
 import GridContainer from "../../components/GridContainer";
+import Loader from "../../components/Loader";
 import Modal from "../../components/Modal";
 import AddProject from "../../features/project/components/AddProject";
 import { getAllProjects } from "../../features/project/services/getAllProjects";
@@ -11,8 +12,10 @@ import { getFormattedDate } from "../../utils/getFormattedDate";
 const ProjectList = () => {
   const [showModal, setShowModal] = useState(false);
   const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   async function fetchProjects() {
+    setLoading(true);
     try {
       const res = await getAllProjects();
       const projectCards = res.data.projects.map((project) => ({
@@ -28,6 +31,8 @@ const ProjectList = () => {
       setProjects(projectCards);
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -40,6 +45,12 @@ const ProjectList = () => {
       <button onClick={() => setShowModal(true)} className="save-btn mb-xl">
         Create new
       </button>
+      {
+        loading && <Loader></Loader>
+      }
+      {
+        projects?.length === 0 && <div>Add projects to practice its interview questions.</div>
+      }
       <GridContainer>
         {projects.map((data) => (
           <Link to={`/project/${data.id}`} key={Math.random()} className="card-link">

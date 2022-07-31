@@ -45,7 +45,7 @@ const SidebarLayout = ({ title, children }) => {
           </ul>
         </div>
       </aside>
-      <main className="main-wrapper">
+      <main className="main-wrapper" style={{position: "relative"}}>
         <div className="main-wrapper-content">
           {title && <h1>{title}</h1>}
 
