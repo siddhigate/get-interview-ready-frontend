@@ -31,10 +31,12 @@ const SidebarLayout = ({ title, children }) => {
                 <span className="d-block">Project Questions</span>
               </li>
             </Link>
+            <Link to="/flashcarddecks">
             <li>
               <img src="../assets/flashcard.png" alt=""></img>
               <span className="d-block">Flash cards</span>
             </li>
+            </Link>
             <li>
               <img src="../assets/dreamcompany.png" alt=""></img>
               <span className="d-block">Dream companies</span>

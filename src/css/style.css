@@ -8,6 +8,7 @@
 @import './components/list.css';
 @import './components/modal.css';
 @import './components/authform.css';
+@import './components/flashcard.css';
 
 @import './layouts/createform.css';
 @import './layouts/embedbtns.css';

@@ -43,18 +43,18 @@
     }
 }
 
-.grid-container .card {
+.card {
     padding: 1.5rem;
     cursor: pointer;
     padding-bottom: 2rem;
 }
 
-.grid-container .date {
+.date {
     color: var(--clr-secondary);
     font-size: 0.8rem;
 }
 
-.grid-container .question {
+.question {
     font-size: 1.25rem;
     margin: 1.5rem 0;
     display: flex;

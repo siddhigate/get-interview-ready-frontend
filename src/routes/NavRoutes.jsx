@@ -5,6 +5,8 @@ import BehavioralQuestion from "../pages/behavioral/BehavioralQuestion";
 import BehavioralQuestionCreate from "../pages/behavioral/BehavioralQuestionCreate";
 import BehavioralQuestionList from "../pages/behavioral/BehavioralQuestionList";
 import Dashboard from "../pages/dashboard/Dashboard";
+import FlashCardDecksList from "../pages/flashcards/FlashCardDecksList";
+import FlashCardsList from "../pages/flashcards/FlashCardsList";
 import Project from "../pages/project/Project";
 import ProjectList from "../pages/project/ProjectList";
 import TechnicalQuestion from "../pages/technical/TechnicalQuestion";
@@ -26,6 +28,9 @@ const NavRoutes = () => {
             <Route path="/project/:id" element={<Project></Project>}></Route>
             <Route path="/technicalquestions" element={<TechnicalQuestionsList></TechnicalQuestionsList>}></Route>
             <Route path="/technicalquestion/:id" element={<TechnicalQuestion></TechnicalQuestion>}></Route>
+            <Route path="/flashcarddecks" element={<FlashCardDecksList></FlashCardDecksList>}></Route>
+            <Route path="/flashcards/:id" element={<FlashCardsList></FlashCardsList>}></Route>
+            
         </Route>
     </Routes>
   )
