@@ -13,6 +13,12 @@
 }
 
 .body-container .main-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.body-container .main-wrapper-content {
     margin: 2rem 1rem 2rem 2rem;
     flex-grow: 1;
 }
