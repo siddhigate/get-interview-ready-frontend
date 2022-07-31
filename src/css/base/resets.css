@@ -45,6 +45,10 @@ a {
   color: inherit;
 }
 
+button:disabled {
+  opacity: 0.5;
+}
+
 /* Remove all animations, for users who have turned them off */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
