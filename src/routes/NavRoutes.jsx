@@ -11,29 +11,53 @@ import Project from "../pages/project/Project";
 import ProjectList from "../pages/project/ProjectList";
 import TechnicalQuestion from "../pages/technical/TechnicalQuestion";
 import TechnicalQuestionsList from "../pages/technical/TechnicalQuestionsList";
+import CompanyList from "../pages/company/CompanyList";
+import Company from "../pages/company/Company";
 import { ProtectedRoutes } from "./ProtectedRoutes";
 
 const NavRoutes = () => {
   return (
     <Routes>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/signup" element={<Signup/>}/>
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
 
-        <Route path="/" element={<ProtectedRoutes/>}>
-            <Route path="/" element={<Dashboard></Dashboard>}></Route>
-            <Route path="/behavioralquestions/all" element={<BehavioralQuestionList></BehavioralQuestionList>}></Route>
-            <Route path="/behavioral/:id" element={<BehavioralQuestion></BehavioralQuestion>}></Route>
-            <Route path="/behavioralcreate/:id" element={<BehavioralQuestionCreate></BehavioralQuestionCreate>}></Route>
-            <Route path="/projects" element={<ProjectList></ProjectList>}></Route>
-            <Route path="/project/:id" element={<Project></Project>}></Route>
-            <Route path="/technicalquestions" element={<TechnicalQuestionsList></TechnicalQuestionsList>}></Route>
-            <Route path="/technicalquestion/:id" element={<TechnicalQuestion></TechnicalQuestion>}></Route>
-            <Route path="/flashcarddecks" element={<FlashCardDecksList></FlashCardDecksList>}></Route>
-            <Route path="/flashcards/:id" element={<FlashCardsList></FlashCardsList>}></Route>
-            
-        </Route>
+      <Route path="/" element={<ProtectedRoutes />}>
+        <Route path="/" element={<Dashboard></Dashboard>}></Route>
+        <Route
+          path="/behavioralquestions/all"
+          element={<BehavioralQuestionList></BehavioralQuestionList>}
+        ></Route>
+        <Route
+          path="/behavioral/:id"
+          element={<BehavioralQuestion></BehavioralQuestion>}
+        ></Route>
+        <Route
+          path="/behavioralcreate/:id"
+          element={<BehavioralQuestionCreate></BehavioralQuestionCreate>}
+        ></Route>
+        <Route path="/projects" element={<ProjectList></ProjectList>}></Route>
+        <Route path="/project/:id" element={<Project></Project>}></Route>
+        <Route
+          path="/technicalquestions"
+          element={<TechnicalQuestionsList></TechnicalQuestionsList>}
+        ></Route>
+        <Route
+          path="/technicalquestion/:id"
+          element={<TechnicalQuestion></TechnicalQuestion>}
+        ></Route>
+        <Route
+          path="/flashcarddecks"
+          element={<FlashCardDecksList></FlashCardDecksList>}
+        ></Route>
+        <Route
+          path="/flashcards/:id"
+          element={<FlashCardsList></FlashCardsList>}
+        ></Route>
+        <Route path="/dreamCompanies" element={<CompanyList />}></Route>
+        <Route path="/dreamCompany/:id" element={<Company />}></Route>
+      </Route>
     </Routes>
-  )
-}
+  );
+};
 
-export default NavRoutes
+export default NavRoutes;
