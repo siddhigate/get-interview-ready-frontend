@@ -42,7 +42,7 @@ const ProjectList = () => {
       </button>
       <GridContainer>
         {projects.map((data) => (
-          <Link to={`/project/${data.id}`} key={Math.random()}>
+          <Link to={`/project/${data.id}`} key={Math.random()} className="card-link">
             <Card
               date={data.date}
               desc={data.tagline}
