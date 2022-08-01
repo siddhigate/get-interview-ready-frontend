@@ -9,7 +9,7 @@ export const ProtectedRoutes = () => {
   return auth.isAuth ? (
     <Outlet />
   ) : (
-    <Navigate to="login" state={{ from: location }} replace />
+    <Navigate to="/" state={{ from: location }} replace />
   );
 
 };

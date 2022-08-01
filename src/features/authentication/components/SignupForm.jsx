@@ -57,7 +57,7 @@ const SignupForm = () => {
   useEffect(() => {
     console.log(auth.isAuth);
     if (auth.isAuth) {
-      navigate("/", { replace: true });
+      navigate("/dashboard", { replace: true });
     }
   }, [auth.isAuth, navigate]);
 

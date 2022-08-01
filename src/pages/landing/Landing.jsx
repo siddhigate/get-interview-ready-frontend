@@ -1,8 +1,20 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../features/authentication/contexts/AuthContext";
 import NavLayout from "../../layouts/NavLayout";
 
 const Landing = () => {
+
+  const { auth } = useAuth();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(auth.isAuth) {
+      navigate("/dashboard");
+    }
+  }, []);
+
   return (
     <NavLayout>
       <div className="main-landing-container">

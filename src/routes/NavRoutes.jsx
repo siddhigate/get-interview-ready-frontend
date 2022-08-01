@@ -21,10 +21,10 @@ const NavRoutes = () => {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/welcome" element={<Landing />}></Route>
+      <Route path="/" element={<Landing />}></Route>
   
       <Route path="/" element={<ProtectedRoutes />}>
-        <Route path="/" element={<Dashboard></Dashboard>}></Route>
+        <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
         <Route
           path="/behavioralquestions/all"
           element={<BehavioralQuestionList></BehavioralQuestionList>}

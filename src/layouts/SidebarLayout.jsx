@@ -7,7 +7,7 @@ const SidebarLayout = ({ title, children }) => {
       <aside className="sidebar">
         <div className="sidebar-links">
           <ul className="list-style-none">
-            <Link to="/">
+            <Link to="/dashboard">
               <li>
                 <img src="../assets/homeicon.png" alt=""></img>
                 <span className="d-block">Dashboard</span>
@@ -66,9 +66,9 @@ const SidebarLayout = ({ title, children }) => {
         className="landing-footer"
       >
         <div className="flex flex-center">
-          <img src="./assets/hashnode.png" alt="" />
+          <img src="/assets/hashnode.png" alt="Hashnode" />
           <div className="m-md">X</div>
-          <img src="./assets/planetscale.jpg" alt="" />
+          <img src="/assets/planetscale.jpg" alt="Planetscale" />
         </div>
       </footer>
       </main>
