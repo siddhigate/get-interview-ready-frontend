@@ -126,6 +126,10 @@
     box-shadow: 0 1px 25px rgba(101, 111, 122, 0.15);
 }
 
+.card-with-shadow:hover {
+    box-shadow: 0 1px 30px rgba(27, 29, 31, 0.2);
+}
+
 @media (max-width: 1200px) { 
     .row-70-30 {
         flex-direction: column;
