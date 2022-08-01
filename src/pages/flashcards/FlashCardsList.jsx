@@ -18,16 +18,16 @@ const FlashCardsList = () => {
   const [showModal, setShowModal] = useState(false);
   const [decks, setDecks] = useState([]);
   const [activeTab, setActiveTab] = useState("tab1");
-  const [name, setName] = useState("")
+  const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
 
   const { id } = useParams();
 
   async function getCards() {
-    setLoading(true)
+    setLoading(true);
     try {
       const res = await getOneFlashcardsDeck(id);
-      setName(res.data.deckName)
+      setName(res.data.deckName);
       const deckCards = res.data.flashCards.map((deck) => ({
         ...deck,
         pills: [],
@@ -49,42 +49,52 @@ const FlashCardsList = () => {
     <SidebarLayout>
       <h1>Flash Cards: {name}</h1>
 
-      {
-        loading && <Loader></Loader>
-      }
+      {loading && <Loader></Loader>}
       <button onClick={() => setShowModal(true)} className="save-btn mt-xl">
         Create new
       </button>
 
-      <ul className="tab-list list-style-none">
-        <TabNavItem
-          title="Cards"
-          id="tab1"
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-        />
-        <TabNavItem
-          title="Test"
-          id="tab2"
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-        />
-      </ul>
-      <TabContent id="tab1" activeTab={activeTab}>
-        <GridContainer>
-          {decks.map((data) => (
-            <FlashCard
-              key={Math.random()}
-              data={data.date}
-              question={data.question}
-              answer={data.answer}
-            ></FlashCard>
-          ))}
-        </GridContainer>
-      </TabContent>
-      <TabContent id="tab2" activeTab={activeTab}>
-        <FlashCardsTest cards={decks} id={id} name={name}></FlashCardsTest>
-      </TabContent>
+      {decks.length === 0 && (
+        <div className="flex-center flex-col">
+          <img src="/assets/empty.svg" alt="empty" />
+          <p style={{ margin: "1rem", fontSize: "1.25rem" }}>
+            No flash cards! Create new.
+          </p>
+        </div>
+      )}
+      {decks.length > 0 && (
+        <>
+          <ul className="tab-list list-style-none">
+            <TabNavItem
+              title="Cards"
+              id="tab1"
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+            />
+            <TabNavItem
+              title="Test"
+              id="tab2"
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+            />
+          </ul>
+          <TabContent id="tab1" activeTab={activeTab}>
+            <GridContainer>
+              {decks.map((data) => (
+                <FlashCard
+                  key={Math.random()}
+                  data={data.date}
+                  question={data.question}
+                  answer={data.answer}
+                ></FlashCard>
+              ))}
+            </GridContainer>
+          </TabContent>
+          <TabContent id="tab2" activeTab={activeTab}>
+            <FlashCardsTest cards={decks} id={id} name={name}></FlashCardsTest>
+          </TabContent>
+        </>
+      )}
 
       {showModal && (
         <Modal title="Add Flash card" closeModal={() => setShowModal(false)}>

@@ -41,6 +41,14 @@ const CompanyList = () => {
       <button onClick={() => setShowModal(true)} className="save-btn mb-xl">
         Create new
       </button>
+      {companies.length === 0 && (
+        <div className="flex-center flex-col">
+          <img src="/assets/empty.svg" alt="empty" />
+          <p style={{ margin: "1rem", fontSize: "1.25rem" }}>
+            No companies! Create new.
+          </p>
+        </div>
+      )}
       <GridContainer>
         {companies.map((data) => (
           <Link

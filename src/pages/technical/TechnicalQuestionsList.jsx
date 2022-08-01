@@ -54,8 +54,8 @@ const TechnicalQuestionsList = () => {
       </button>
       {
         questions.length === 0 && <div className="flex-center flex-col">
-          <img src="./assets/empty.svg" alt="empty"/>
-          <p style={{margin: "1rem", fontSize: "1.25rem"}}>No projects! Create new projects.</p>
+          <img src="/assets/empty.svg" alt="empty"/>
+          <p style={{margin: "1rem", fontSize: "1.25rem"}}>No questions! Create new.</p>
         </div>
       }
       <GridContainer>

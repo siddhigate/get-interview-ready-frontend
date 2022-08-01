@@ -49,6 +49,14 @@ const FlashCardDecksList = () => {
       <button onClick={() => setShowModal(true)} className="save-btn mb-xl mt-xl">
         Create new
       </button>
+      {decks.length === 0 && (
+        <div className="flex-center flex-col">
+          <img src="/assets/empty.svg" alt="empty" />
+          <p style={{ margin: "1rem", fontSize: "1.25rem" }}>
+            No flash cards! Create new.
+          </p>
+        </div>
+      )}
       <GridContainer>
         {decks.map((data) => (
           <Link
