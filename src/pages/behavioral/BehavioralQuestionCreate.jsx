@@ -29,24 +29,26 @@ const BehavioralQuestionCreate = () => {
 
   async function saveAnswer() {
     setLoading(true);
-    console.log(question, answer)
+    console.log(question, answer);
     setError("");
-    try {
-      const res = await createBehavioralQuestion({ ...question, answer });
-      console.log(res.data);
-      navigate(`/behavioral/${res.data.behavioralQuestion.id}`, {
-        replace: true,
-      });
-      setLoading(false);
-    } catch (err) {
-      if (err?.response?.data?.message?.length > 0) {
-        setError(err.response.data.message);
-      } else if (err.code === "ERR_NETWORK") {
-        setError("Something went wrong, please check your network.");
-      } else {
-        setError("Something went wrong.");
+    if (!answer) {
+      setError("Please enter answer");
+    } else {
+      try {
+        const res = await createBehavioralQuestion({ ...question, answer });
+        console.log(res.data);
+        navigate(`/behavioral/${res.data.behavioralQuestion.id}`, {
+          replace: true,
+        });
+        setLoading(false);
+      } catch (err) {
+        if (err.code === "ERR_NETWORK") {
+          setError("Something went wrong, please check your network.");
+        } else {
+          setError("Something went wrong.");
+        }
+        setLoading(false);
       }
-      setLoading(false);
     }
   }
 
@@ -68,10 +70,18 @@ const BehavioralQuestionCreate = () => {
         <h1 style={{ marginBottom: "1rem" }}>{question?.question}</h1>
       )}
       {id.id === "new" && (
-        <input type="text" placeholder="Enter Question here"
-        style={{border: "none", borderBottom: "1px solid gray", fontSize: "2rem"}}
-        className="d-block mb-md"
-        onChange={e => setQuestion(q => ({...q, question: e.target.value}))}
+        <input
+          type="text"
+          placeholder="Enter Question here"
+          style={{
+            border: "none",
+            borderBottom: "1px solid gray",
+            fontSize: "2rem",
+          }}
+          className="d-block mb-md"
+          onChange={(e) =>
+            setQuestion((q) => ({ ...q, question: e.target.value }))
+          }
         ></input>
       )}
       <button
